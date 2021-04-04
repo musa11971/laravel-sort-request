@@ -6,18 +6,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use musa11971\SortRequest\Exceptions\EloquentSortingException;
 
-class EloquentSortingHandler {
+class EloquentSortingHandler
+{
     /** @var Request $request */
-    private $request;
+    private Request $request;
 
     /** @var Builder $builder */
-    private $builder;
+    private Builder $builder;
 
     /** @var array $rules */
-    private $rules;
+    private array $rules;
 
     /** @var SortableColumnCollection $sortableColumns */
-    private $sortableColumns;
+    private SortableColumnCollection $sortableColumns;
 
     public function __construct($request, $builder)
     {
@@ -35,7 +36,7 @@ class EloquentSortingHandler {
      * @return Builder
      * @throws EloquentSortingException
      */
-    function handle()
+    function handle(): Builder
     {
         // Check whether the request uses the trait before continuing
         $this->checkForTrait();
@@ -58,10 +59,10 @@ class EloquentSortingHandler {
      * Handle the sorting of a column.
      *
      * @param SortableColumn $sortableColumn
-     * @param array $rule
-     * @param Builder $builder
+     * @param array          $rule
+     * @param Builder        $builder
      */
-    private function handleSort($sortableColumn, $rule, &$builder)
+    private function handleSort(SortableColumn $sortableColumn, array $rule, Builder &$builder)
     {
         // Call the sorter's apply method
         $builder = $sortableColumn->sorter->apply(request(), $builder, $rule['direction']);

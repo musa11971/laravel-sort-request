@@ -17,7 +17,7 @@ class DummyClass extends Sorter
      *
      * @return Builder
      */
-    public function apply(Request $request, Builder $builder, $direction): Builder
+    public function apply(Request $request, Builder $builder, string $direction): Builder
     {
         // ...
 

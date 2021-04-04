@@ -5,6 +5,7 @@ namespace musa11971\SortRequest\Traits;
 use Illuminate\Foundation\Http\FormRequest;
 use musa11971\SortRequest\Exceptions\BadTraitImplementation;
 use musa11971\SortRequest\Rules\SortParameter;
+use musa11971\SortRequest\SortableColumnCollection;
 
 trait SortsViaRequest
 {
@@ -16,7 +17,7 @@ trait SortsViaRequest
     abstract function getSortableColumns(): array;
 
     /** @var SortParameter $sortParameterRule */
-    private $sortParameterRule;
+    private SortParameter $sortParameterRule;
 
     /** @noinspection PhpUnhandledExceptionInspection */
     public function __construct()
@@ -33,7 +34,7 @@ trait SortsViaRequest
      *
      * @return array
      */
-    function validatedSortingRules()
+    function validatedSortingRules(): array
     {
         return $this->sortParameterRule->sortingRules;
     }
@@ -41,9 +42,9 @@ trait SortsViaRequest
     /**
      * Returns the transformed sortable columns.
      *
-     * @return \musa11971\SortRequest\SortableColumnCollection
+     * @return SortableColumnCollection
      */
-    function transformedSortableColumns()
+    function transformedSortableColumns(): SortableColumnCollection
     {
         return $this->sortParameterRule->sortableColumns;
     }
@@ -54,7 +55,7 @@ trait SortsViaRequest
      * @param string $parameterName
      * @return array
      */
-    protected function sortingRules($parameterName = 'sort')
+    protected function sortingRules(string $parameterName = 'sort'): array
     {
         return [
             $parameterName => [$this->sortParameterRule]

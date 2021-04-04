@@ -28,7 +28,15 @@ https://example.test/tv-shows?sort=popularity(most-popular)
 
 ## Installation
 
-You can install the package via composer:
+You can download a release and manually include it in your project:
+
+| PHP Version   | Sort Request Version  |
+| ------------- |-----------------------|
+| PHP 7.3       | [Sort Request 1.0](../../releases/tag/1.0.1)             |
+| PHP 7.4       | [Sort Request 2.0](../../releases/tag/2.0)               |
+| PHP 8.0       | [Sort Request 2.0](../../releases/tag/2.0)               |
+
+Alternatively you can install the package via composer:
 
 ```bash
 composer require musa11971/laravel-sort-request
@@ -39,6 +47,9 @@ composer require musa11971/laravel-sort-request
 Add the `SortsViaRequest` trait to your [Laravel form request](https://laravel.com/docs/6.x/validation#form-request-validation).
 
 ```php
+use musa11971\SortRequest\Tests\Support\Requests\FormRequest;
+use musa11971\SortRequest\Traits\SortsViaRequest;
+
 class GetItemsRequest extends FormRequest
 {
     use SortsViaRequest;
@@ -78,7 +89,12 @@ function getSortableColumns(): array
 ```
 
 Next, go to your controller and add the `sortViaRequest` method as follows:
+
 ```php
+use Illuminate\Routing\Controller;
+use musa11971\SortRequest\Tests\Support\Models\Item;
+use musa11971\SortRequest\Tests\Support\Requests\GetItemsRequest;
+
 class ItemController extends Controller
 {
     /**

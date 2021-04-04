@@ -2,7 +2,7 @@
 
 namespace musa11971\SortRequest\Tests\Support\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource as Resource;
 use musa11971\SortRequest\Tests\Support\Models\Item;
 
 class ItemResource extends Resource

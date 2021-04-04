@@ -13,18 +13,18 @@ class SortParameter implements Rule
     const SORT_PATTERN = "~(?'column'[a-zA-Z0-9-_]*)\((?'direction'[a-zA-Z0-9-_]*)\)~";
 
     /** @var string $failure */
-    private $failure = 'The :attribute is invalid.';
+    private string $failure = 'The :attribute is invalid.';
 
     /** @var SortableColumnCollection $sortableColumns */
-    public $sortableColumns;
+    public SortableColumnCollection $sortableColumns;
 
     /** @var array $sortingRules */
-    public $sortingRules = [];
+    public array $sortingRules = [];
 
     /**
      * @param array $sortableColumns
      */
-    public function __construct($sortableColumns)
+    public function __construct(array $sortableColumns)
     {
         $this->sortableColumns = $this->transformSortableColumns($sortableColumns);
     }
@@ -32,11 +32,12 @@ class SortParameter implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         // Go through the value and take out all the rules
         $rules = [];
@@ -78,10 +79,11 @@ class SortParameter implements Rule
     /**
      * Makes the validation rule fail and sets the failure message.
      *
-     * @param $failure
+     * @param string $failure
      * @return bool
      */
-    private function fail($failure) {
+    private function fail(string $failure): bool
+    {
         $this->failure = $failure;
 
         return false;
@@ -92,7 +94,7 @@ class SortParameter implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return $this->failure;
     }
@@ -103,7 +105,7 @@ class SortParameter implements Rule
      * @param $subject
      * @return array|null
      */
-    private function takeNextSortRule(&$subject)
+    private function takeNextSortRule(&$subject): ?array
     {
         if(preg_match(self::SORT_PATTERN, $subject, $match))
         {
@@ -123,9 +125,10 @@ class SortParameter implements Rule
      * Transforms the format used in form requests to a SortableColumnCollection.
      *
      * @param array $columns
+     *
      * @return SortableColumnCollection
      */
-    private function transformSortableColumns($columns)
+    private function transformSortableColumns(array $columns): SortableColumnCollection
     {
         $collection = new SortableColumnCollection();
 

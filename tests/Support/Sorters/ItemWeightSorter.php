@@ -13,11 +13,11 @@ class ItemWeightSorter extends Sorter
      *
      * @param Request $request
      * @param Builder $builder
-     * @param string $direction
+     * @param string  $direction
      *
      * @return Builder
      */
-    public function apply(Request $request, Builder $builder, $direction): Builder
+    public function apply(Request $request, Builder $builder, string $direction): Builder
     {
         if($direction == 'heavy')
             $builder->orderBy('stackSize', 'desc');

@@ -10,9 +10,10 @@ class SortableColumnCollection extends Collection
      * Checks whether the given column name can be sorted on.
      *
      * @param string $column
+     *
      * @return bool
      */
-    function isValidColumn($column)
+    function isValidColumn(string $column): bool
     {
         $column = $this->find($column);
 
@@ -24,9 +25,10 @@ class SortableColumnCollection extends Collection
      *
      * @param string $column
      * @param string $direction
+     *
      * @return bool
      */
-    function isValidDirectionForColumn($column, $direction)
+    function isValidDirectionForColumn(string $column, string $direction): bool
     {
         $column = $this->find($column);
 
@@ -40,10 +42,10 @@ class SortableColumnCollection extends Collection
     /**
      * Returns the SortableColumn with the given name or null if not found.
      *
-     * @param $column
+     * @param string $column
      * @return SortableColumn|null
      */
-    function find($column)
+    function find(string $column): ?SortableColumn
     {
         foreach($this->items as $item) {
             if($item->name === $column) return $item;
